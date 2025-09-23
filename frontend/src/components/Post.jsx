@@ -600,45 +600,48 @@ function Post({ id, author, like, comment, description, image, createdAt }) {
   return (
     <div className="w-full max-w-full bg-white rounded-lg p-4 gap-4 flex flex-col post-container mb-4">
       {/* Post Header */}
-      <div className="flex justify-between items-start w-full gap-2 sm:gap-3 md:gap-4">
-        <div
-          className="flex items-start gap-2 sm:gap-3 md:gap-4 cursor-pointer flex-1 min-w-0"
-          onClick={() => handleGetProfile(author.userName)}
-        >
-          <img
-            src={author.profileImage || dp}
-            alt=""
-            className="w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] md:w-[55px] md:h-[55px] rounded-full object-cover flex-shrink-0"
-          />
+  {/* Post Header */}
+<div className="flex justify-between items-start w-full gap-2 sm:gap-3 md:gap-4">
+  <div
+    className="flex items-start gap-2 sm:gap-3 md:gap-4 cursor-pointer flex-1 min-w-0"
+    onClick={() => handleGetProfile(author.userName)}
+  >
+    <img
+      src={author.profileImage || dp}
+      alt=""
+      className="w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] md:w-[55px] md:h-[55px] rounded-full object-cover flex-shrink-0"
+    />
 
-          <div className="flex flex-col max-w-full overflow-hidden">
-            <div className="text-[14px] sm:text-[16px] md:text-[20px] font-semibold text-gray-700 truncate">
-              {`${author.firstName} ${author.lastName}`}
-            </div>
-            <div className="text-[12px] sm:text-[14px] md:text-[16px] text-gray-700 truncate">
-              {author.headline}
-            </div>
-            <div className="text-[10px] sm:text-[12px] md:text-[14px] text-gray-500">
-              {moment(createdAt).fromNow()}
-            </div>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-2 sm:gap-3 md:gap-4 flex-shrink-0">
-          {author._id === userData?._id ? (
-            <>
-              <button onClick={() => setIsEditing(true)}>
-                <MdEdit className="text-[20px] sm:text-[25px] md:text-[30px] text-blue-400 hover:text-blue-600" />
-              </button>
-              <button onClick={handleDelete}>
-                <MdDelete className="text-[20px] sm:text-[25px] md:text-[30px] text-red-400 hover:text-red-600" />
-              </button>
-            </>
-          ) : (
-            <ConnectionButton userId={author._id} />
-          )}
-        </div>
+    <div className="flex flex-col max-w-full overflow-hidden">
+      <div className="text-[14px] sm:text-[16px] md:text-[20px] font-semibold text-gray-700 truncate">
+        {`${author.firstName} ${author.lastName}`}
       </div>
+      <div className="text-[12px] sm:text-[14px] md:text-[16px] text-gray-700 truncate">
+        {author.headline}
+      </div>
+      <div className="text-[10px] sm:text-[12px] md:text-[14px] text-gray-500">
+        {moment(createdAt).fromNow()}
+      </div>
+    </div>
+  </div>
+
+  {/* Status / Edit-Delete Buttons */}
+  <div className="flex items-center gap-2 sm:gap-3 md:gap-4 flex-shrink-0">
+    {author._id === userData?._id ? (
+      <>
+        <button onClick={() => setIsEditing(true)}>
+          <MdEdit className="text-[20px] sm:text-[25px] md:text-[30px] text-blue-400 hover:text-blue-600" />
+        </button>
+        <button onClick={handleDelete}>
+          <MdDelete className="text-[20px] sm:text-[25px] md:text-[30px] text-red-400 hover:text-red-600" />
+        </button>
+      </>
+    ) : (
+      <ConnectionButton userId={author._id} />
+    )}
+  </div>
+</div>
+
 
       {/* Description */}
       <div className="w-full pl-[10px] sm:pl-[15px] md:pl-[20px] relative max-w-full">
