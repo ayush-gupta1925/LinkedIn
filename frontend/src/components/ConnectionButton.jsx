@@ -4,7 +4,7 @@ import { authDataContext } from "../context/AuthContext.jsx";
 import { userDataContext } from "../context/UserContext.jsx";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { socket } from "../context/userContext.jsx"; // use same socket
+import { socket } from "../context/UserContext.jsx"; // use same socket
 
 function ConnectionButton({ userId }) {
   const { serverUrl } = useContext(authDataContext);
