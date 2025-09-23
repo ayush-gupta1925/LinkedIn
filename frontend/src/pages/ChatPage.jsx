@@ -466,7 +466,7 @@ function ChatPage() {
         {/* Input */}
         <form
           onSubmit={sendMessage}
-          className="absolute bottom-17 sm:bottom-9 left-0 w-full sm:w-full flex items-center px-2 sm:px-4 gap-2 sm:gap-3"
+          className="absolute bottom-14 sm:bottom-9 left-0 w-full sm:w-full flex items-center px-2 sm:px-4 gap-2 sm:gap-3"
         >
           <input
             type="text"
