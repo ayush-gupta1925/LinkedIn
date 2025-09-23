@@ -440,7 +440,6 @@
 
 
 
-
 import React, { useContext, useState, useEffect, useRef } from "react";
 import dp from "../assets/dp.png";
 import { IoMdSend } from "react-icons/io";
@@ -450,7 +449,7 @@ import { MdEdit, MdDelete } from "react-icons/md";
 import axios from "axios";
 import moment from "moment";
 import { authDataContext } from "../context/AuthContext.jsx";
-import { socket, userDataContext } from "../context/UserContext.jsx";
+import { socket, userDataContext } from "../context/UserUserContext.jsx";
 import ConnectionButton from "./ConnectionButton.jsx";
 
 function Post({ id, author, like, comment, description, image, createdAt }) {
@@ -600,11 +599,11 @@ function Post({ id, author, like, comment, description, image, createdAt }) {
   };
 
   return (
-    <div className="w-full min-h-[200px] bg-white rounded-lg p-4 gap-4 flex flex-col post-container mb-4">
+    <div className="w-full max-w-full bg-white rounded-lg p-4 gap-4 flex flex-col post-container mb-4">
       {/* Post Header */}
-      <div className="flex justify-between items-center w-full">
+      <div className="flex justify-between items-start w-full gap-2 sm:gap-3 md:gap-4">
         <div
-          className="flex items-start gap-2 sm:gap-3 md:gap-4 cursor-pointer"
+          className="flex items-start gap-2 sm:gap-3 md:gap-4 cursor-pointer max-w-full"
           onClick={() => handleGetProfile(author.userName)}
         >
           <img
@@ -613,19 +612,21 @@ function Post({ id, author, like, comment, description, image, createdAt }) {
             className="w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] md:w-[55px] md:h-[55px] rounded-full object-cover"
           />
 
-          <div>
-            <div className="text-[14px] sm:text-[16px] md:text-[20px] font-semibold text-gray-700">{`${author.firstName} ${author.lastName}`}</div>
-            <div className="text-[12px] sm:text-[14px] md:text-[16px] text-gray-700">
+          <div className="max-w-[calc(100%-60px)] sm:max-w-[calc(100%-70px)] md:max-w-[calc(100%-80px)]">
+            <div className="text-[14px] sm:text-[16px] md:text-[20px] font-semibold text-gray-700 truncate">
+              {`${author.firstName} ${author.lastName}`}
+            </div>
+            <div className="text-[12px] sm:text-[14px] md:text-[16px] text-gray-700 truncate">
               {author.headline}
             </div>
-            <div className="text-[10px] sm:text-[12px] md:text-[14px] text-gray-600">
+            <div className="text-[10px] sm:text-[12px] md:text-[14px] text-gray-500">
               {moment(createdAt).fromNow()}
             </div>
           </div>
         </div>
 
         {author._id === userData?._id ? (
-          <div className="flex gap-4 sm:gap-6 md:gap-9">
+          <div className="flex gap-2 sm:gap-3 md:gap-4">
             <button onClick={() => setIsEditing(true)}>
               <MdEdit className="text-[20px] sm:text-[25px] md:text-[30px] text-blue-400 hover:text-blue-600" />
             </button>
@@ -639,9 +640,9 @@ function Post({ id, author, like, comment, description, image, createdAt }) {
       </div>
 
       {/* Description */}
-      <div className="w-full md:ml-[70px] sm:ml-[50px] ml-[30px] relative">
+      <div className="w-full pl-[10px] sm:pl-[15px] md:pl-[20px] relative max-w-full">
         <div
-          className={`pl-1 sm:pl-2 md:pl-3 whitespace-pre-wrap break-words overflow-wrap-anywhere word-break-break-word ${
+          className={`whitespace-pre-wrap break-words overflow-wrap-anywhere word-break-break-word ${
             !more ? "max-h-[80px] sm:max-h-[100px] overflow-hidden" : ""
           } text-[13px] sm:text-[15px] md:text-[16px]`}
         >
@@ -650,7 +651,7 @@ function Post({ id, author, like, comment, description, image, createdAt }) {
 
         {editDesc.length > 150 && (
           <div
-            className="pl-2 sm:pl-3 text-[12px] sm:text-[14px] md:text-[15px] font-semibold cursor-pointer text-blue-500"
+            className="text-[12px] sm:text-[14px] md:text-[15px] font-semibold cursor-pointer text-blue-500 mt-1"
             onClick={() => setMore((p) => !p)}
           >
             {more ? "read less.." : "read more.."}
@@ -687,18 +688,18 @@ function Post({ id, author, like, comment, description, image, createdAt }) {
 
         <div className="mt-3 sm:mt-4 flex items-center justify-between">
           <div
-            className="flex items-center gap-2 sm:gap-3 cursor-pointer w-full ml-[5px] sm:ml-[10px]"
+            className="flex items-center gap-2 sm:gap-3 cursor-pointer w-full max-w-full"
             onClick={likee}
           >
             {!likes.includes(userData?._id) ? (
               <>
                 <AiOutlineLike className="w-[22px] h-[22px] sm:w-[26px] sm:h-[26px] md:w-[30px] md:h-[30px] text-[#1ebbff]" />
-                <span className="text-[13px] sm:text-[15px]">like</span>
+                <span className="text-[13px] sm:text-[15px] truncate">like</span>
               </>
             ) : (
               <>
                 <AiFillLike className="w-[22px] h-[22px] sm:w-[26px] sm:h-[26px] md:w-[30px] md:h-[30px] text-[#186dec]" />
-                <span className="text-[#1452e1] text-[13px] sm:text-[15px]">
+                <span className="text-[#1452e1] text-[13px] sm:text-[15px] truncate">
                   Liked
                 </span>
               </>
@@ -716,9 +717,9 @@ function Post({ id, author, like, comment, description, image, createdAt }) {
 
         {/* Comment Section */}
         {showComment && (
-          <div className="mt-4 ml-[5px] sm:ml-[10px] mr-[5px] sm:mr-[10px]">
+          <div className="mt-4 ml-[5px] sm:ml-[10px] mr-[5px] sm:mr-[10px] max-w-full">
             <form
-              className="flex items-center gap-1 sm:gap-2 border-b-2 pb-1 sm:pb-2"
+              className="flex items-center gap-1 sm:gap-2 border-b-2 pb-1 sm:pb-2 w-full"
               onSubmit={handleComment}
             >
               <input
@@ -726,7 +727,7 @@ function Post({ id, author, like, comment, description, image, createdAt }) {
                 placeholder="leave a comment"
                 value={commentContent}
                 onChange={(e) => setCommentContent(e.target.value)}
-                className="flex-1 outline-none text-[13px] sm:text-[15px]"
+                className="flex-1 outline-none text-[13px] sm:text-[15px] max-w-full"
               />
               <button type="submit">
                 <IoMdSend className="text-[18px] sm:text-[20px] md:text-[22px] hover:text-[#0baff5]" />
@@ -737,23 +738,23 @@ function Post({ id, author, like, comment, description, image, createdAt }) {
               {comments.map((com) => (
                 <div
                   key={com._id || com.createdAt}
-                  className="pb-3 sm:pb-4 border-b-2 last:border-b-0"
+                  className="pb-3 sm:pb-4 border-b-2 last:border-b-0 w-full"
                 >
-                  <div className="flex items-start gap-2 sm:gap-3">
+                  <div className="flex items-start gap-2 sm:gap-3 max-w-full">
                     <img
                       src={com.user.profileImage || dp}
                       alt=""
                       className="w-[35px] h-[35px] sm:w-[45px] sm:h-[45px] md:w-[55px] md:h-[55px] rounded-full object-cover"
                     />
-                    <div className="max-w-full pr-[20px]">
-                      <div className="text-[14px] sm:text-[16px] md:text-[18px] font-semibold">{`${com.user.firstName} ${com.user.lastName}`}</div>
-                      <div className="text-[11px] sm:text-[13px] md:text-[14px] text-gray-600">
+                    <div className="max-w-full">
+                      <div className="text-[14px] sm:text-[16px] md:text-[18px] font-semibold truncate">{`${com.user.firstName} ${com.user.lastName}`}</div>
+                      <div className="text-[11px] sm:text-[13px] md:text-[14px] text-gray-600 truncate">
                         {com.user.headline}
                       </div>
                       <div className="text-[10px] sm:text-[11px] md:text-[12px] text-gray-500">
                         {moment(com.createdAt).fromNow()}
                       </div>
-                      <div className="mt-1 sm:mt-2 text-[13px] sm:text-[15px] whitespace-pre-wrap break-words overflow-wrap-anywhere word-break-break-word pr-[20px]">
+                      <div className="mt-1 sm:mt-2 text-[13px] sm:text-[15px] whitespace-pre-wrap break-words max-w-full">
                         {com.content}
                       </div>
                     </div>
