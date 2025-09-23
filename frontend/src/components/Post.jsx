@@ -690,36 +690,35 @@ function Post({ id, author, like, comment, description, image, createdAt }) {
 
         <div className="border-b border-gray-200" />
 
-        <div className="mt-3 sm:mt-4 flex items-center justify-between flex-wrap">
-          <div
-            className="flex items-center justify-between gap-2 sm:gap-3 cursor-pointer w-full sm:w-auto max-w-full"
-            onClick={likee}
-          >
-            {!likes.includes(userData?._id) ? (
-              <>
-                <AiOutlineLike className="w-[22px] h-[22px] sm:w-[26px] sm:h-[26px] md:w-[30px] md:h-[30px] text-[#1ebbff]" />
-                <span className="text-[13px] sm:text-[15px] truncate">
-                  like
-                </span>
-              </>
-            ) : (
-              <>
-                <AiFillLike className="w-[22px] h-[22px] sm:w-[26px] sm:h-[26px] md:w-[30px] md:h-[30px] text-[#186dec]" />
-                <span className="text-[#1452e1] text-[13px] sm:text-[15px] truncate">
-                  Liked
-                </span>
-              </>
-            )}
-          </div>
+        <div className="mt-3 sm:mt-4 flex items-center flex-wrap">
+  {/* Like Button */}
+  <div
+    className="flex items-center gap-2 sm:gap-3 cursor-pointer"
+    onClick={likee}
+  >
+    {!likes.includes(userData?._id) ? (
+      <>
+        <AiOutlineLike className="w-[22px] h-[22px] sm:w-[26px] sm:h-[26px] md:w-[30px] md:h-[30px] text-[#1ebbff]" />
+        <span className="text-[13px] sm:text-[15px] truncate">like</span>
+      </>
+    ) : (
+      <>
+        <AiFillLike className="w-[22px] h-[22px] sm:w-[26px] sm:h-[26px] md:w-[30px] md:h-[30px] text-[#186dec]" />
+        <span className="text-[#1452e1] text-[13px] sm:text-[15px] truncate">Liked</span>
+      </>
+    )}
+  </div>
 
-          <div
-            className="flex items-center gap-1 sm:gap-2 cursor-pointer mr-2 sm:mr-4 hover:text-[#7474b7]"
-            onClick={() => setShowComment((p) => !p)}
-          >
-            <FaRegCommentDots className="text-[14px] sm:text-[16px] md:text-[18px]" />
-            <span className="text-[13px] sm:text-[15px]">comment</span>
-          </div>
-        </div>
+  {/* Comment Button - Align Right */}
+  <div
+    className="flex items-center gap-1 sm:gap-2 cursor-pointer ml-auto hover:text-[#7474b7]"
+    onClick={() => setShowComment((p) => !p)}
+  >
+    <FaRegCommentDots className="text-[14px] sm:text-[16px] md:text-[18px]" />
+    <span className="text-[13px] sm:text-[15px]">comment</span>
+  </div>
+</div>
+
 
         {/* Comment Section */}
         {showComment && (
