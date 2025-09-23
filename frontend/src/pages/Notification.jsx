@@ -191,11 +191,10 @@
 // }
 
 
-
 import React, { useContext, useEffect, useState } from "react";
 import Nav from "../components/Nav.jsx";
 import { authDataContext } from "../context/AuthContext.jsx";
-import { userDataContext } from "../context/userContext.jsx";
+import { userDataContext } from "../context/UserContext.jsx";
 import dp from "../assets/dp.png";
 import axios from "axios";
 import { RxCross2 } from "react-icons/rx";
@@ -205,12 +204,12 @@ export default function Notification() {
   const { handleGetProfile } = useContext(userDataContext);
 
   const [notificationData, setNotificationData] = useState([]);
-  const [expanded, setExpanded] = useState({});
+  const [expanded, setExpanded] = useState({}); // track which descriptions are expanded
 
   const handleGetNotification = async () => {
     try {
-      const result = await axios.get(serverUrl + "/api/notification/get", {
-        withCredentials: true
+      const result = await axios.get(`${serverUrl}/api/notification/get?ts=${Date.now()}`, {
+        withCredentials: true,
       });
       setNotificationData(result.data || []);
     } catch (err) {
@@ -220,10 +219,10 @@ export default function Notification() {
 
   const handledeleteOneNotification = async (id) => {
     try {
-      await axios.delete(serverUrl + `/api/notification/deleteone/${id}`, {
-        withCredentials: true
+      await axios.delete(`${serverUrl}/api/notification/deleteone/${id}`, {
+        withCredentials: true,
       });
-      handleGetNotification();
+      await handleGetNotification();
     } catch (err) {
       console.error(err);
     }
@@ -231,20 +230,20 @@ export default function Notification() {
 
   const handledeleteAllNotification = async () => {
     try {
-      await axios.delete(serverUrl + "/api/notification", {
-        withCredentials: true
+      await axios.delete(`${serverUrl}/api/notification`, {
+        withCredentials: true,
       });
-      handleGetNotification();
+      await handleGetNotification();
     } catch (err) {
       console.error(err);
     }
   };
 
-  function handleMessage(type) {
+  const handleMessage = (type) => {
     if (type === "like") return "Liked your post";
     if (type === "comment") return "Commented on your post";
     return "Accepted your connection";
-  }
+  };
 
   useEffect(() => {
     handleGetNotification();
@@ -255,12 +254,12 @@ export default function Notification() {
   };
 
   return (
-    <div className="w-screen min-h-screen bg-[#f0efe7] pt-[100px] px-2 sm:px-4 md:px-8 flex flex-col items-center gap-4">
+    <div className="w-screen min-h-screen bg-[#f0efe7] pt-[80px] px-2 sm:px-4 md:px-8 flex flex-col items-center gap-3 sm:gap-4">
       <Nav />
 
       {/* Header + Clear All */}
-      <div className="w-full max-w-[900px] shadow-lg rounded-lg p-4 text-lg text-gray-700 bg-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
-        <div className="text-[20px] sm:text-[22px] font-semibold">
+      <div className="w-full max-w-[900px] shadow-lg rounded-lg p-3 sm:p-4 text-base sm:text-lg text-gray-700 bg-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
+        <div className="text-[16px] sm:text-[22px] font-semibold">
           Notifications (<span className="font-bold">{notificationData.length}</span>)
         </div>
 
@@ -285,11 +284,11 @@ export default function Notification() {
             return (
               <div
                 key={id}
-                className="w-full bg-white shadow rounded-lg p-3 sm:p-4 flex flex-col sm:flex-row gap-3 sm:gap-4 items-start sm:items-center relative hover:shadow-md transition-shadow"
+                className="w-full bg-white shadow rounded-lg p-3 sm:p-4 flex flex-col sm:flex-row gap-3 sm:gap-4 relative hover:shadow-md transition-shadow"
               >
                 {/* Left: Avatar + Info */}
                 <div
-                  className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 flex-1 min-w-0 cursor-pointer"
+                  className="flex items-start gap-3 flex-1 cursor-pointer"
                   onClick={() => handleGetProfile(relatedUser.userName)}
                 >
                   <img
@@ -298,27 +297,27 @@ export default function Notification() {
                     className="w-12 h-12 sm:w-16 sm:h-16 rounded-full object-cover flex-shrink-0 shadow-sm"
                   />
 
-                  <div className="flex flex-col sm:flex-1 min-w-0 w-full">
+                  <div className="flex-1 min-w-0 flex flex-col gap-1 sm:gap-2">
                     {/* Name + Date */}
-                    <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-2 items-start sm:items-center">
-                      <div className="text-[16px] sm:text-[18px] font-semibold text-gray-800 truncate">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-2">
+                      <div className="text-[14px] sm:text-[18px] font-semibold truncate">
                         {`${relatedUser.firstName || ""} ${relatedUser.lastName || ""}`}
                       </div>
-                      <div className="text-xs sm:text-sm text-gray-500">
+                      <div className="text-[10px] sm:text-sm text-gray-500 mt-0 sm:mt-0">
                         {new Date(noti.createdAt || Date.now()).toLocaleString()}
                       </div>
                     </div>
 
                     {/* Notification message */}
-                    <div className="text-sm text-[#147ce5] font-medium mt-1 sm:mt-0">
+                    <div className="text-[12px] sm:text-sm text-[#147ce5] font-medium mt-1">
                       {handleMessage(noti.type)}
                     </div>
 
                     {/* Description + Image */}
                     {post && (
-                      <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 mt-3 sm:mt-2">
+                      <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 mt-2 sm:mt-3">
                         {post.image && (
-                          <div className="w-full sm:w-[100px] h-[100px] flex-shrink-0 rounded overflow-hidden bg-gray-50">
+                          <div className="w-full sm:w-[100px] h-[80px] sm:h-[100px] flex-shrink-0 rounded overflow-hidden bg-gray-50">
                             <img
                               src={post.image}
                               alt="Post thumbnail"
@@ -326,16 +325,16 @@ export default function Notification() {
                             />
                           </div>
                         )}
-                        <div className="w-full sm:w-[70%]">
+                        <div className="flex-1">
                           {post.description && (
                             <div className="flex-1 border-l-4 border-r-4 rounded-lg bg-gray-50 p-2 sm:p-3">
                               <div
-                                className={`break-words whitespace-pre-wrap text-sm sm:text-base ${
+                                className={`break-words whitespace-pre-wrap text-[12px] sm:text-sm ${
                                   expanded[id] ? "" : "line-clamp-3"
                                 }`}
                                 style={{
                                   maxHeight: expanded[id] ? "none" : "4.5em",
-                                  overflow: expanded[id] ? "visible" : "hidden"
+                                  overflow: expanded[id] ? "visible" : "hidden",
                                 }}
                               >
                                 {post.description}
@@ -347,7 +346,7 @@ export default function Notification() {
                                     e.stopPropagation();
                                     toggleExpand(id);
                                   }}
-                                  className="mt-1 sm:mt-2 text-xs sm:text-sm font-medium text-blue-600 hover:underline"
+                                  className="mt-1 sm:mt-2 text-[11px] sm:text-sm font-medium text-blue-600 hover:underline"
                                 >
                                   {expanded[id] ? "Show less" : "Read more"}
                                 </button>
@@ -370,7 +369,7 @@ export default function Notification() {
           })}
         </div>
       ) : (
-        <div className="w-full max-w-[900px] bg-white shadow rounded-lg p-4 sm:p-6 text-center text-gray-600">
+        <div className="w-full max-w-[900px] bg-white shadow rounded-lg p-4 text-center text-gray-600 text-sm sm:text-base">
           No notifications yet
         </div>
       )}
