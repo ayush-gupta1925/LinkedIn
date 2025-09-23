@@ -221,7 +221,7 @@ import { RxCrossCircled } from "react-icons/rx";
 import { FaRegCircleCheck } from "react-icons/fa6";
 import axios from "axios";
 import dp from "../assets/dp.png";
-import { userDataContext } from "../context/userContext.jsx";
+import { userDataContext } from "../context/UserContext.jsx";
 
 function Network() {
   const { serverUrl } = useContext(authDataContext);
