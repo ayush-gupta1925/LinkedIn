@@ -441,20 +441,16 @@
 
 
 
-
 import React, { useContext, useState, useEffect, useRef } from "react";
 import dp from "../assets/dp.png";
 import { IoMdSend } from "react-icons/io";
 import { FaRegCommentDots } from "react-icons/fa";
 import { AiOutlineLike, AiFillLike } from "react-icons/ai";
-import { BsImage } from "react-icons/bs";
-import { RxCross2 } from "react-icons/rx";
 import { MdEdit, MdDelete } from "react-icons/md";
 import axios from "axios";
 import moment from "moment";
 import { authDataContext } from "../context/AuthContext.jsx";
 import { socket, userDataContext } from "../context/UserContext.jsx";
-
 import ConnectionButton from "./ConnectionButton.jsx";
 
 function Post({ id, author, like, comment, description, image, createdAt }) {
@@ -470,12 +466,8 @@ function Post({ id, author, like, comment, description, image, createdAt }) {
   const [commentContent, setCommentContent] = useState("");
   const [showComment, setShowComment] = useState(false);
 
-  const {
-    userData,
-    getPost,
-    handleGetProfile,
-    setPostData
-  } = useContext(userDataContext);
+  const { userData, handleGetProfile, setPostData } =
+    useContext(userDataContext);
   const { serverUrl } = useContext(authDataContext);
 
   useEffect(() => {
@@ -647,9 +639,9 @@ function Post({ id, author, like, comment, description, image, createdAt }) {
       </div>
 
       {/* Description */}
-      <div className="w-full md:ml-[70px] sm:ml-[50px] ml-[30px] overflow-y-auto relative">
+      <div className="w-full md:ml-[70px] sm:ml-[50px] ml-[30px] relative">
         <div
-          className={`break-words pl-1 sm:pl-2 md:pl-3 ${
+          className={`pl-1 sm:pl-2 md:pl-3 whitespace-pre-wrap break-words overflow-wrap-anywhere word-break-break-word ${
             !more ? "max-h-[80px] sm:max-h-[100px] overflow-hidden" : ""
           } text-[13px] sm:text-[15px] md:text-[16px]`}
         >
@@ -753,7 +745,7 @@ function Post({ id, author, like, comment, description, image, createdAt }) {
                       alt=""
                       className="w-[35px] h-[35px] sm:w-[45px] sm:h-[45px] md:w-[55px] md:h-[55px] rounded-full object-cover"
                     />
-                    <div>
+                    <div className="max-w-full">
                       <div className="text-[14px] sm:text-[16px] md:text-[18px] font-semibold">{`${com.user.firstName} ${com.user.lastName}`}</div>
                       <div className="text-[11px] sm:text-[13px] md:text-[14px] text-gray-600">
                         {com.user.headline}
@@ -761,7 +753,7 @@ function Post({ id, author, like, comment, description, image, createdAt }) {
                       <div className="text-[10px] sm:text-[11px] md:text-[12px] text-gray-500">
                         {moment(com.createdAt).fromNow()}
                       </div>
-                      <div className="mt-1 sm:mt-2 text-[13px] sm:text-[15px]">
+                      <div className="mt-1 sm:mt-2 text-[13px] sm:text-[15px] whitespace-pre-wrap break-words overflow-wrap-anywhere word-break-break-word">
                         {com.content}
                       </div>
                     </div>
@@ -777,4 +769,3 @@ function Post({ id, author, like, comment, description, image, createdAt }) {
 }
 
 export default Post;
-
