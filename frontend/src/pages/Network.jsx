@@ -213,7 +213,6 @@
 
 // export default Network;
 
-
 import React, { useEffect, useState, useContext } from "react";
 import Nav from "../components/Nav";
 import { authDataContext } from "../context/AuthContext.jsx";
@@ -228,7 +227,6 @@ function Network() {
   const {
     handleGetProfile,
     userConnections,
-    setUserConnections,
     fetchUserConnections
   } = useContext(userDataContext);
 
@@ -338,7 +336,8 @@ function Network() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2 sm:gap-3 self-end sm:self-center">
+                {/* Right aligned buttons for medium/large */}
+                <div className="flex items-center gap-2 sm:gap-3 sm:ml-auto self-end sm:self-center">
                   <button
                     onClick={() => handleAcceptConnection(connection._id)}
                     className="text-[#18c5ff] hover:text-blue-600"
@@ -382,7 +381,7 @@ function Network() {
               {userConnections.map((conn) => (
                 <div
                   key={conn._id}
-                  className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 p-2 sm:p-3 border-b last:border-b-0 hover:bg-[#f0f4f7]"
+                  className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4 p-2 sm:p-3 border-b last:border-b-0 hover:bg-[#f0f4f7]"
                 >
                   <div className="flex items-center gap-3 sm:gap-4 w-full sm:w-auto">
                     <img
@@ -404,7 +403,8 @@ function Network() {
                     </div>
                   </div>
 
-                  <div className="flex gap-2 sm:gap-4 mt-1 sm:mt-0 self-end sm:self-center">
+                  {/* Buttons right side for medium/large */}
+                  <div className="flex gap-2 sm:gap-4 sm:ml-auto mt-1 sm:mt-0 self-end sm:self-center">
                     <button
                       onClick={() => handleGetProfile(conn.userName)}
                       className="text-xs sm:text-sm bg-blue-50 text-blue-600 px-2 sm:px-3 py-1 rounded hover:bg-[#bcced3]"
@@ -429,3 +429,4 @@ function Network() {
 }
 
 export default Network;
+
