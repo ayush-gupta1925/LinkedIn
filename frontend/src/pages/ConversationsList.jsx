@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { userDataContext } from "../context/userContext.jsx";
+import { userDataContext } from "../context/UserContext.jsx";
 import { authDataContext } from "../context/AuthContext.jsx";
 import dp from "../assets/dp.png";
 import { IoArrowBackOutline } from "react-icons/io5";
