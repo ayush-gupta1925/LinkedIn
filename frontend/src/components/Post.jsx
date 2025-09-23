@@ -692,7 +692,7 @@ function Post({ id, author, like, comment, description, image, createdAt }) {
 
         <div className="mt-3 sm:mt-4 flex items-center justify-between flex-wrap">
           <div
-            className="flex items-center gap-2 sm:gap-3 cursor-pointer w-full sm:w-auto max-w-full"
+            className="flex items-center justify-between gap-2 sm:gap-3 cursor-pointer w-full sm:w-auto max-w-full"
             onClick={likee}
           >
             {!likes.includes(userData?._id) ? (
