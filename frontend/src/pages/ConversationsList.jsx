@@ -133,15 +133,33 @@ function ConversationsList() {
   return (
     <div className="w-full min-h-screen bg-gradient-to-b from-blue-100 to-blue-50 flex flex-col items-center py-4">
       {/* Nav */}
-      <button
+      {/* <button
         onClick={() => navigate("/")}
         className="text-[#373535] font-bold hover:bg-blue-500 p-2 rounded transition absolute top-4 left-4 sm:left-6 z-10"
       >
         <IoArrowBack className="w-6 h-6 sm:w-8 sm:h-7" />
-      </button>
+      </button> */}
+
+
+      <button
+   onClick={() => navigate("/")}
+  className="text-[#373535] font-bold hover:bg-blue-500 hidden md:block p-2 rounded transition absolute top-4 left-2 sm:left-6 z-10"
+>
+  <IoArrowBack className="w-6 h-6 sm:w-8 sm:h-7" />
+</button>
+
 
       {/* Header */}
-      <div className="w-full sm:w-[90%] md:w-[80%] lg:w-[60%] bg-blue-600 text-white p-3 sm:p-4 rounded-lg shadow flex items-center gap-3">
+      <div className="w-full sm:w-[90%] md:w-[80%] lg:w-[60%] bg-blue-600 text-white p-3 sm:p-4 rounded-lg shadow flex items-center gap-2">
+
+<button
+   onClick={() => navigate("/")}
+  className="text-[#373535] font-bold hover:bg-blue-500 block md:hidden p-2 rounded transition sm:left-6 z-10"
+>
+  <IoArrowBack className="w-6 h-6 sm:w-8 sm:h-7" />
+</button>
+
+        
         <span className="text-lg sm:text-xl font-bold">Conversations</span>
       </div>
 
