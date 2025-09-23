@@ -241,7 +241,6 @@
 
 
 
-
 import React, { useContext, useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -372,17 +371,17 @@ function ChatPage() {
   };
 
   return (
-    <div className="w-full min-h-screen bg-blue-50 flex flex-col items-center py-4">
-      {/* Nav */}
+    <div className="w-full min-h-screen bg-blue-50 flex flex-col items-center pt-4 pb-16 sm:pb-4 relative">
+      {/* Nav + Back button */}
       <button
         onClick={() => navigate("/conversations")}
-        className="text-[#373535] font-bold hover:bg-blue-500 p-2 rounded transition absolute top-4 left-4 sm:left-6"
+        className="text-[#373535] font-bold hover:bg-blue-500 p-2 rounded transition absolute top-4 left-2 sm:left-6 z-10"
       >
         <IoArrowBack className="w-6 h-6 sm:w-8 sm:h-7" />
       </button>
 
       {/* Header */}
-      <div className="w-full sm:w-[80%] md:w-[70%] lg:w-[60%] flex justify-between items-center bg-blue-600 text-white px-3 sm:px-4 py-3 sm:py-4 rounded-lg shadow">
+      <div className="w-full sm:w-[80%] md:w-[70%] lg:w-[60%] flex justify-between items-center bg-blue-600 text-white px-3 sm:px-4 py-3 sm:py-4 rounded-lg shadow relative">
         <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
           <img
             src={receiver?.profileImage || dp}
@@ -406,7 +405,7 @@ function ChatPage() {
       </div>
 
       {/* Chat container */}
-      <div className="w-full sm:w-[80%] md:w-[70%] lg:w-[60%] flex-1 mt-4 bg-white shadow rounded-lg flex flex-col">
+      <div className="w-full sm:w-[80%] md:w-[70%] lg:w-[60%] flex-1 mt-4 bg-white shadow rounded-lg flex flex-col relative">
         {/* Messages */}
         <div
           ref={chatContainerRef}
@@ -459,18 +458,18 @@ function ChatPage() {
         {/* Input */}
         <form
           onSubmit={sendMessage}
-          className="h-[60px] sm:h-[70px] border-t bg-white flex items-center px-2 sm:px-4 gap-2 sm:gap-3 rounded-b-lg"
+          className="absolute bottom-12 sm:bottom-4 left-0 w-full sm:w-full flex items-center px-2 sm:px-4 gap-2 sm:gap-3"
         >
           <input
             type="text"
             value={content}
             onChange={(e) => setContent(e.target.value)}
             placeholder="Type a message..."
-            className="flex-1 border rounded-full px-3 sm:px-4 py-1 sm:py-2 text-sm sm:text-base outline-none"
+            className="flex-1 border rounded-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base outline-none shadow"
           />
           <button
             type="submit"
-            className="bg-blue-500 text-white rounded-full p-2 sm:p-3 hover:bg-blue-600 flex items-center justify-center"
+            className="bg-blue-500 text-white rounded-full p-2 sm:p-3 hover:bg-blue-600 flex items-center justify-center shadow"
           >
             <IoMdSend className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
@@ -481,4 +480,3 @@ function ChatPage() {
 }
 
 export default ChatPage;
-
