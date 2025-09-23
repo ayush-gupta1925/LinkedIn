@@ -59,7 +59,7 @@ function EditProfile() {
   }
 
   function addSkill(e) {
-    e.preventDefault;
+  e.preventDefault(); // ✅
     if (newSkills && !skills.includes(newSkills)) {
       setSkills([...skills, newSkills]);
     }
@@ -73,7 +73,7 @@ function EditProfile() {
   }
 
   function addEducation(e) {
-    e.preventDefault();
+   e.preventDefault(); // ✅
     if (
       newEducation.college &&
       newEducation.degree &&
@@ -94,7 +94,7 @@ function EditProfile() {
   }
 
   function addExperince(e) {
-    e.preventDefault();
+   e.preventDefault(); // ✅
     if (
       newExperience.title &&
       newExperience.company &&
