@@ -4,7 +4,7 @@ import axios from "axios";
 import { IoMdSend } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
 import dp from "../assets/dp.png";
-import { userDataContext, socket } from "../context/userContext.jsx";
+import { userDataContext, socket } from "../context/UserContext.jsx";
 import { authDataContext } from "../context/AuthContext.jsx";
 import { IoArrowBack } from "react-icons/io5";
 import moment from "moment";
