@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useContext, useState } from "react";
 import { authDataContext } from "../context/AuthContext.jsx";
-import { userDataContext } from "../context/userContext.jsx";
+import { userDataContext } from "../context/UserContext.jsx";
 
 function SignUp({ getPost }) {
   // ✅ getPost prop liya
