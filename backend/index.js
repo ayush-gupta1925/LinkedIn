@@ -16,7 +16,7 @@ let app = express();
 let server = http.createServer(app);
 export const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: "https://linkedin-frontends.onrender.com",
     credentials: true
   }
 });
@@ -24,7 +24,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://linkedin-frontends.onrender.com",
     credentials: true
   })
 );
@@ -53,5 +53,5 @@ io.on("connection", (socket) => {
 
 server.listen(port, () => {
   connectDb();
-  console.log("kaho rajau hm taiyar hayi ho");
+  console.log(`server is running on ${port}`);
 });
