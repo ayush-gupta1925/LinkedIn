@@ -284,7 +284,184 @@
 
 
 
-import React, { useContext, useState, useRef, useEffect } from "react";
+// import React, { useContext, useState, useRef, useEffect } from "react";
+// import Nav from "../components/Nav.jsx";
+// import dp from "../assets/dp.png";
+// import { userDataContext } from "../context/UserContext.jsx";
+// import { IoPencil } from "react-icons/io5";
+// import { authDataContext } from "../context/AuthContext.jsx";
+// import { IoCameraOutline } from "react-icons/io5";
+// import { FiPlus } from "react-icons/fi";
+
+// import EditProfile from "../components/EditProfile.jsx";
+// import Post from "../components/Post.jsx";
+// import ConnectionButton from "../components/ConnectionButton.jsx";
+// import { useNavigate } from "react-router-dom";
+
+// function Profile() {
+//   const navigate = useNavigate();
+//   let {
+//     userData,
+//     setUserData,
+//     edit,
+//     setEdit,
+//     postData,
+//     setPostData,
+//     profileData,
+//     setProfileData
+//   } = useContext(userDataContext);
+
+//   let [profilePost, setProfilePost] = useState([]);
+//   let { serverUrl } = useContext(authDataContext);
+
+//   useEffect(() => {
+//     setProfilePost(
+//       postData.filter((post) => post.author._id === profileData._id)
+//     );
+//   }, [profileData, postData]);
+
+//   return (
+//     <div className="w-full min-h-[100vh] bg-[#f0efe7] flex flex-col items-center pt-[80px] sm:pt-[100px]">
+//       <Nav />
+
+//       {edit && <EditProfile />}
+
+//       <div className="w-full max-w-[900px] min-h-[100vh] flex flex-col gap-[10px] px-4 sm:px-[20px] pb-[40px]">
+//         {/* Cover Image */}
+//         <div className="relative bg-white">
+//           <div className="w-full h-[80px] sm:h-[100px] bg-gray-400 overflow-hidden flex items-center justify-center relative cursor-pointer rounded-lg">
+//             {profileData.coverImage ? (
+//               <img
+//                 src={profileData.coverImage}
+//                 alt="Cover"
+//                 className="w-full object-cover cursor-pointer rounded-lg"
+//               />
+//             ) : (
+//               <div className="w-full h-full bg-gray-300 flex items-center justify-center text-gray-500 text-sm sm:text-base">
+//                 No Cover Image
+//               </div>
+//             )}
+//             <IoCameraOutline className="absolute right-3 sm:right-4 top-3 sm:top-4 w-5 h-5 sm:w-7 sm:h-6 cursor-pointer" />
+//           </div>
+
+//           {/* Profile Pic */}
+//           <div className="rounded-full overflow-hidden items-center justify-center relative -top-10 sm:-top-12 left-4 sm:left-5">
+//             <img
+//               src={profileData.profileImage || dp}
+//               alt=""
+//               className="w-12 h-12 sm:w-[70px] sm:h-[70px] cursor-pointer rounded-full object-cover"
+//             />
+//           </div>
+
+//           {/* Plus Button */}
+//           <div className="w-5 h-5 sm:w-[20px] sm:h-[20px] absolute bg-[#17c1ff] top-[60px] sm:top-[95px] left-[40px] sm:left-[70px] rounded-full flex justify-center items-center cursor-pointer">
+//             <FiPlus className="text-gray-800 text-[10px] sm:text-base" />
+//           </div>
+
+//           {/* Name */}
+//           <div className="text-sm sm:text-[22px] font-semibold text-gray-700 relative -top-10 sm:-top-12 left-4 sm:left-5 truncate">
+//             {`${profileData.firstName} ${profileData.lastName}`}
+//           </div>
+
+//           {/* Headline */}
+//           <div className="text-xs sm:text-[18px] font-semibold text-gray-600 relative -top-11 sm:-top-13 left-4 sm:left-5 truncate">
+//             {profileData.headline || ""}
+//           </div>
+
+//           {/* Location */}
+//           <div className="text-xs sm:text-[15px] font-semibold text-gray-500 relative -top-11 sm:-top-13 left-4 sm:left-5 truncate">
+//             {profileData.location}
+//           </div>
+
+//           {/* Connections */}
+//           <div className="text-xs sm:text-[15px] font-semibold text-gray-500 relative -top-11 sm:-top-13 left-4 sm:left-5">
+//             {`${profileData.connection?.length} Connection`}
+//           </div>
+
+//           {/* Buttons */}
+//           {profileData._id !== userData._id && (
+//             <div className="w-full flex justify-between items-center -mt-6 sm:mt-0 mb-4 px-4 sm:px-5">
+//               <ConnectionButton userId={profileData._id} />
+//               <button
+//                 onClick={() => navigate(`/chat/${profileData._id}`)}
+//                 className="w-[120px] sm:w-[150px] h-[35px] sm:h-[40px] rounded-full border-2 border-[#2dc0ff] text-[#2dc0ff] flex gap-2 justify-center items-center text-[14px] sm:text-[17px] hover:bg-[#2dc0ff] hover:text-white transition"
+//               >
+//                 Message
+//               </button>
+//             </div>
+//           )}
+
+//           {profileData._id === userData._id && (
+//             <button
+//               className="w-[120px] sm:w-[150px] h-[35px] sm:h-[40px] rounded-full border-2 border-[#2dc0ff] text-[#2dc0ff] flex gap-2 ml-4 justify-center items-center mb-4 text-[14px] sm:text-[17px] hover:bg-[#84cae8] hover:text-white"
+//               onClick={() => setEdit(true)}
+//             >
+//               Edit Profile <IoPencil />
+//             </button>
+//           )}
+//         </div>
+
+//         {/* Posts Section */}
+//         <div className="w-full h-[80px] sm:h-[100px] flex items-center p-3 sm:p-5 text-[16px] sm:text-[22px] text-gray-600 font-semibold bg-white shadow-lg rounded-lg">
+//           {`Posts (${profilePost.length})`}
+//         </div>
+
+//         <div className="flex flex-col items-center justify-start gap-3 sm:gap-4">
+//           {profilePost.map((post, index) => (
+//             <Post
+//               key={index}
+//               id={post._id}
+//               description={post.description}
+//               author={post.author}
+//               image={post.image}
+//               like={post.like}
+//               comment={post.comment}
+//               createdAt={post.createdAt}
+//             />
+//           ))}
+//         </div>
+
+//         {/* Skills Section */}
+//         {profileData.skills?.length > 0 && (
+//           <div className="w-full min-h-[100px] flex flex-col justify-center p-4 sm:p-6 font-semibold bg-white shadow-lg rounded-lg gap-3">
+//             <div className="text-[20px] sm:text-[27px] text-gray-600">Skills</div>
+//             <div className="flex flex-wrap justify-start items-center gap-2 sm:gap-4 text-gray-600 text-xs sm:text-[15px]">
+//               {profileData.skills.map((skill, index) => (
+//                 <div
+//                   key={index}
+//                   className="border-2 border-black text-[#5c1af4] px-2 sm:px-4 py-1 rounded-full flex items-center gap-1 sm:gap-2 mb-2 sm:mb-2 cursor-pointer bg-[#edeeef] text-[10px] sm:text-[15px]"
+//                 >
+//                   {skill}
+//                 </div>
+//               ))}
+//               {profileData._id === userData._id && (
+//                 <button
+//                   className="w-[100px] sm:w-[120px] h-[30px] sm:h-[40px] rounded-full border-2 border-[#2dc0ff] text-[#2dc0ff] flex gap-2 justify-center items-center mb-2 sm:mb-2 text-[12px] sm:text-[19px] hover:bg-[#2dc0ff] hover:text-white transition"
+//                   onClick={() => setEdit(true)}
+//                 >
+//                   Add Skills
+//                 </button>
+//               )}
+//             </div>
+//           </div>
+//         )}
+
+//         {/* Education & Experience sections remain same but adjust text & padding */}
+//         {/* You can apply similar responsive classes: text-xs sm:text-base, p-3 sm:p-8 */}
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Profile;
+
+
+
+
+
+
+
+import React, { useContext, useState, useEffect } from "react";
 import Nav from "../components/Nav.jsx";
 import dp from "../assets/dp.png";
 import { userDataContext } from "../context/UserContext.jsx";
@@ -300,24 +477,23 @@ import { useNavigate } from "react-router-dom";
 
 function Profile() {
   const navigate = useNavigate();
-  let {
+  const {
     userData,
-    setUserData,
     edit,
     setEdit,
     postData,
-    setPostData,
     profileData,
     setProfileData
   } = useContext(userDataContext);
 
-  let [profilePost, setProfilePost] = useState([]);
-  let { serverUrl } = useContext(authDataContext);
+  const { serverUrl } = useContext(authDataContext);
+
+  const [profilePost, setProfilePost] = useState([]);
 
   useEffect(() => {
-    setProfilePost(
-      postData.filter((post) => post.author._id === profileData._id)
-    );
+    if (profileData) {
+      setProfilePost(postData.filter((post) => post.author._id === profileData._id));
+    }
   }, [profileData, postData]);
 
   return (
@@ -375,7 +551,7 @@ function Profile() {
 
           {/* Connections */}
           <div className="text-xs sm:text-[15px] font-semibold text-gray-500 relative -top-11 sm:-top-13 left-4 sm:left-5">
-            {`${profileData.connection?.length} Connection`}
+            {`${profileData.connection?.length} Connection${profileData.connection?.length > 1 ? 's' : ''}`}
           </div>
 
           {/* Buttons */}
@@ -406,6 +582,7 @@ function Profile() {
           {`Posts (${profilePost.length})`}
         </div>
 
+        {/* Posts */}
         <div className="flex flex-col items-center justify-start gap-3 sm:gap-4">
           {profilePost.map((post, index) => (
             <Post
@@ -446,12 +623,44 @@ function Profile() {
           </div>
         )}
 
-        {/* Education & Experience sections remain same but adjust text & padding */}
-        {/* You can apply similar responsive classes: text-xs sm:text-base, p-3 sm:p-8 */}
+        {/* Education Section */}
+        {profileData.education?.length > 0 && (
+          <div className="w-full flex flex-col p-4 sm:p-6 font-semibold bg-white shadow-lg rounded-lg gap-3">
+            <div className="text-[20px] sm:text-[27px] text-gray-600 mb-2">Education</div>
+            {profileData.education.map((edu, index) => (
+              <div key={index} className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-4 border-b last:border-b-0 pb-2 sm:pb-3">
+                <div className="text-gray-700 text-[13px] sm:text-[16px] font-semibold">
+                  {edu.college || "-"}
+                </div>
+                <div className="text-gray-600 text-[12px] sm:text-[15px]">
+                  {edu.degree ? `${edu.degree} in ${edu.fieldOfStudy}` : "-"}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Experience Section */}
+        {profileData.experience?.length > 0 && (
+          <div className="w-full flex flex-col p-4 sm:p-6 font-semibold bg-white shadow-lg rounded-lg gap-3">
+            <div className="text-[20px] sm:text-[27px] text-gray-600 mb-2">Experience</div>
+            {profileData.experience.map((exp, index) => (
+              <div key={index} className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-4 border-b last:border-b-0 pb-2 sm:pb-3">
+                <div className="text-gray-700 text-[13px] sm:text-[16px] font-semibold">
+                  {exp.title || "-"}
+                </div>
+                <div className="text-gray-600 text-[12px] sm:text-[15px]">
+                  {exp.company ? `${exp.company} - ${exp.description || ""}` : "-"}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
 }
 
 export default Profile;
+
 
