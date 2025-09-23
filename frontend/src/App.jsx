@@ -3,7 +3,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import Login from "./pages/Login.jsx";
-import { userDataContext } from "./context/userContext.jsx";
+import { userDataContext } from "./context/UserContext.jsx";
 import Network from "./pages/Network";
 import Profile from "./pages/Profile.jsx";
 import Notification from "./pages/Notification.jsx";
