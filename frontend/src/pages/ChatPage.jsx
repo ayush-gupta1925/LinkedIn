@@ -373,16 +373,24 @@ function ChatPage() {
   return (
     <div className="w-full min-h-screen bg-blue-50 flex flex-col items-center pt-4 pb-16 sm:pb-4 relative">
       {/* Nav + Back button */}
-      <button
-        onClick={() => navigate("/conversations")}
-        className="text-[#373535] font-bold hover:bg-blue-500 p-2 rounded transition absolute top-4 left-2 sm:left-6 z-10"
-      >
-        <IoArrowBack className="w-6 h-6 sm:w-8 sm:h-7" />
-      </button>
+    <button
+  onClick={() => navigate("/conversations")}
+  className="text-[#373535] font-bold hover:bg-blue-500 hidden md:block p-2 rounded transition absolute top-4 left-2 sm:left-6 z-10"
+>
+  <IoArrowBack className="w-6 h-6 sm:w-8 sm:h-7" />
+</button>
+
 
       {/* Header */}
       <div className="w-full sm:w-[80%] md:w-[70%] lg:w-[60%] flex justify-between items-center bg-blue-600 text-white px-3 sm:px-4 py-3 sm:py-4 rounded-lg shadow relative">
         <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+           <button
+  onClick={() => navigate("/conversations")}
+  className="text-[#373535] font-bold hover:bg-blue-500 block md:hidden p-2 rounded transition absolute top-4 left-2 sm:left-6 z-10"
+>
+  <IoArrowBack className="w-6 h-6 sm:w-8 sm:h-7" />
+</button>
+
           <img
             src={receiver?.profileImage || dp}
             alt="dp"
@@ -458,7 +466,7 @@ function ChatPage() {
         {/* Input */}
         <form
           onSubmit={sendMessage}
-          className="absolute bottom-12 sm:bottom-4 left-0 w-full sm:w-full flex items-center px-2 sm:px-4 gap-2 sm:gap-3"
+          className="absolute bottom-17 sm:bottom-9 left-0 w-full sm:w-full flex items-center px-2 sm:px-4 gap-2 sm:gap-3"
         >
           <input
             type="text"
