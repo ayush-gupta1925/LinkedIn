@@ -10,7 +10,7 @@ import axios from "axios";
 import moment from "moment";
 import { MdDelete } from "react-icons/md";
 import { authDataContext } from "../context/AuthContext.jsx";
-import { socket, userDataContext } from "../context/userContext.jsx";
+import { socket, userDataContext } from "../context/UserContext.jsx";
 
 import ConnectionButton from "./ConnectionButton.jsx";
 
