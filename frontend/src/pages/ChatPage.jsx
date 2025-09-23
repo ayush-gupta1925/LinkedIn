@@ -386,7 +386,7 @@ function ChatPage() {
         <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
            <button
   onClick={() => navigate("/conversations")}
-  className="text-[#373535] font-bold hover:bg-blue-500 block md:hidden p-2 rounded transition absolute top-4 left-2 sm:left-6 z-10"
+  className="text-[#373535] font-bold hover:bg-blue-500 block md:hidden p-2 rounded transition  sm:left-6 z-10"
 >
   <IoArrowBack className="w-6 h-6 sm:w-8 sm:h-7" />
 </button>
