@@ -490,6 +490,8 @@ function Profile() {
 
   const [profilePost, setProfilePost] = useState([]);
 
+  console.log(profileData)
+  
   useEffect(() => {
     if (profileData) {
       setProfilePost(postData.filter((post) => post.author._id === profileData._id));
