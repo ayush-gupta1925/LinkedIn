@@ -439,7 +439,6 @@
 
 
 
-
 import React, { useContext, useState, useEffect, useRef } from "react";
 import dp from "../assets/dp.png";
 import { IoMdSend } from "react-icons/io";
@@ -603,16 +602,16 @@ function Post({ id, author, like, comment, description, image, createdAt }) {
       {/* Post Header */}
       <div className="flex justify-between items-start w-full gap-2 sm:gap-3 md:gap-4">
         <div
-          className="flex items-start gap-2 sm:gap-3 md:gap-4 cursor-pointer max-w-full"
+          className="flex items-start gap-2 sm:gap-3 md:gap-4 cursor-pointer flex-1 min-w-0"
           onClick={() => handleGetProfile(author.userName)}
         >
           <img
             src={author.profileImage || dp}
             alt=""
-            className="w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] md:w-[55px] md:h-[55px] rounded-full object-cover"
+            className="w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] md:w-[55px] md:h-[55px] rounded-full object-cover flex-shrink-0"
           />
 
-          <div className="max-w-[calc(100%-60px)] sm:max-w-[calc(100%-70px)] md:max-w-[calc(100%-80px)]">
+          <div className="flex flex-col max-w-full overflow-hidden">
             <div className="text-[14px] sm:text-[16px] md:text-[20px] font-semibold text-gray-700 truncate">
               {`${author.firstName} ${author.lastName}`}
             </div>
@@ -625,18 +624,20 @@ function Post({ id, author, like, comment, description, image, createdAt }) {
           </div>
         </div>
 
-        {author._id === userData?._id ? (
-          <div className="flex gap-2 sm:gap-3 md:gap-4">
-            <button onClick={() => setIsEditing(true)}>
-              <MdEdit className="text-[20px] sm:text-[25px] md:text-[30px] text-blue-400 hover:text-blue-600" />
-            </button>
-            <button onClick={handleDelete}>
-              <MdDelete className="text-[20px] sm:text-[25px] md:text-[30px] text-red-400 hover:text-red-600" />
-            </button>
-          </div>
-        ) : (
-          <ConnectionButton userId={author._id} />
-        )}
+        <div className="flex items-center gap-2 sm:gap-3 md:gap-4 flex-shrink-0">
+          {author._id === userData?._id ? (
+            <>
+              <button onClick={() => setIsEditing(true)}>
+                <MdEdit className="text-[20px] sm:text-[25px] md:text-[30px] text-blue-400 hover:text-blue-600" />
+              </button>
+              <button onClick={handleDelete}>
+                <MdDelete className="text-[20px] sm:text-[25px] md:text-[30px] text-red-400 hover:text-red-600" />
+              </button>
+            </>
+          ) : (
+            <ConnectionButton userId={author._id} />
+          )}
+        </div>
       </div>
 
       {/* Description */}
@@ -686,15 +687,17 @@ function Post({ id, author, like, comment, description, image, createdAt }) {
 
         <div className="border-b border-gray-200" />
 
-        <div className="mt-3 sm:mt-4 flex items-center justify-between">
+        <div className="mt-3 sm:mt-4 flex items-center justify-between flex-wrap">
           <div
-            className="flex items-center gap-2 sm:gap-3 cursor-pointer w-full max-w-full"
+            className="flex items-center gap-2 sm:gap-3 cursor-pointer w-full sm:w-auto max-w-full"
             onClick={likee}
           >
             {!likes.includes(userData?._id) ? (
               <>
                 <AiOutlineLike className="w-[22px] h-[22px] sm:w-[26px] sm:h-[26px] md:w-[30px] md:h-[30px] text-[#1ebbff]" />
-                <span className="text-[13px] sm:text-[15px] truncate">like</span>
+                <span className="text-[13px] sm:text-[15px] truncate">
+                  like
+                </span>
               </>
             ) : (
               <>
