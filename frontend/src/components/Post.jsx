@@ -753,7 +753,7 @@ function Post({ id, author, like, comment, description, image, createdAt }) {
                       <div className="text-[10px] sm:text-[11px] md:text-[12px] text-gray-500">
                         {moment(com.createdAt).fromNow()}
                       </div>
-                      <div className="mt-1 sm:mt-2 text-[13px] sm:text-[15px] whitespace-pre-wrap break-words overflow-wrap-anywhere word-break-break-word">
+                      <div className="mt-1 sm:mt-2 text-[13px] sm:text-[15px] whitespace-pre-wrap break-words overflow-wrap-anywhere word-break-break-word pr-[20px]">
                         {com.content}
                       </div>
                     </div>
