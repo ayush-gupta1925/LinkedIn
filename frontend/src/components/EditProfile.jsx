@@ -1,6 +1,6 @@
 import React, { useContext, useRef, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
-import { userDataContext } from "../context/userContext.jsx";
+import { userDataContext } from "../context/UserContext.jsx";
 import { FiPlus } from "react-icons/fi";
 import dp from "../assets/dp.png";
 import { IoCameraOutline } from "react-icons/io5";
