@@ -214,7 +214,6 @@
 // export default Network;
 
 
-
 import React, { useEffect, useState, useContext } from "react";
 import Nav from "../components/Nav";
 import { authDataContext } from "../context/AuthContext.jsx";
@@ -229,6 +228,7 @@ function Network() {
   const {
     handleGetProfile,
     userConnections,
+    setUserConnections,
     fetchUserConnections
   } = useContext(userDataContext);
 
@@ -296,9 +296,9 @@ function Network() {
   }, []);
 
   return (
-    <div className="w-screen min-h-[100vh] bg-[#f0efe7] pt-[80px] px-2 sm:px-[20px] flex flex-col gap-6 items-center">
+    <div className="w-screen min-h-[100vh] bg-[#f0efe7] pt-[100px] px-3 sm:px-[20px] flex flex-col gap-6 items-center">
       <Nav />
-      <div className="w-full max-w-[900px] shadow-lg rounded-lg p-3 sm:p-4 text-base sm:text-[22px] text-gray-700 bg-white flex items-center justify-center">
+      <div className="w-full max-w-[900px] h-[80px] sm:h-[100px] shadow-lg rounded-lg p-3 sm:p-4 text-[18px] sm:text-[22px] text-gray-700 bg-white flex items-center justify-center">
         Invitations ({requests.length})
       </div>
 
@@ -317,7 +317,7 @@ function Network() {
             {requests.map((connection) => (
               <div
                 key={connection._id}
-                className="w-full flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-0 p-3 sm:p-4 border-b last:border-b-0 hover:bg-gray-50"
+                className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0 p-3 sm:p-4 border-b last:border-b-0 hover:bg-gray-50"
               >
                 <div
                   className="flex items-center gap-3 sm:gap-4 cursor-pointer w-full sm:w-auto"
@@ -326,19 +326,19 @@ function Network() {
                   <img
                     src={connection.sender.profileImage || dp}
                     alt=""
-                    className="w-12 h-12 sm:w-[60px] sm:h-[60px] rounded-full object-cover"
+                    className="w-[45px] h-[45px] sm:w-[60px] sm:h-[60px] rounded-full object-cover"
                   />
-                  <div className="flex-1">
-                    <div className="text-sm sm:text-lg font-semibold text-gray-700 truncate">
+                  <div className="flex flex-col">
+                    <div className="text-sm sm:text-lg font-semibold text-gray-700">
                       {connection.sender.firstName} {connection.sender.lastName}
                     </div>
-                    <div className="text-xs sm:text-sm text-gray-600 truncate">
+                    <div className="text-xs sm:text-sm text-gray-600">
                       {connection.sender.headline}
                     </div>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2 sm:gap-3">
+                <div className="flex items-center gap-2 sm:gap-3 self-end sm:self-center">
                   <button
                     onClick={() => handleAcceptConnection(connection._id)}
                     className="text-[#18c5ff] hover:text-blue-600"
@@ -378,42 +378,42 @@ function Network() {
           </div>
         ) : (
           <div className="bg-white shadow rounded-lg p-3 sm:p-4">
-            <div className="w-full flex flex-col gap-2 sm:gap-0">
+            <div className="w-full flex flex-col gap-3">
               {userConnections.map((conn) => (
                 <div
                   key={conn._id}
-                  className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 p-3 border-b rounded hover:bg-[#f0f4f7]"
+                  className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 p-2 sm:p-3 border-b last:border-b-0 hover:bg-[#f0f4f7]"
                 >
-                  <div className="flex items-center gap-3 flex-1">
+                  <div className="flex items-center gap-3 sm:gap-4 w-full sm:w-auto">
                     <img
                       src={conn.profileImage || dp}
                       alt={`${conn.firstName} ${conn.lastName}`}
-                      className="w-12 h-12 sm:w-[60px] sm:h-[60px] rounded-full object-cover cursor-pointer"
+                      className="w-[45px] h-[45px] sm:w-[60px] sm:h-[60px] rounded-full object-cover cursor-pointer"
                       onClick={() => handleGetProfile(conn.userName)}
                     />
-                    <div>
+                    <div className="flex flex-col">
                       <div
                         className="text-sm sm:text-lg font-semibold text-gray-700 cursor-pointer"
                         onClick={() => handleGetProfile(conn.userName)}
                       >
                         {conn.firstName} {conn.lastName}
                       </div>
-                      <div className="text-xs sm:text-sm text-gray-600 cursor-pointer truncate">
+                      <div className="text-xs sm:text-sm text-gray-600 cursor-pointer">
                         {conn.headline}
                       </div>
                     </div>
                   </div>
 
-                  <div className="flex gap-2 sm:gap-4 mt-2 sm:mt-0">
+                  <div className="flex gap-2 sm:gap-4 mt-1 sm:mt-0 self-end sm:self-center">
                     <button
                       onClick={() => handleGetProfile(conn.userName)}
-                      className="text-xs sm:text-sm bg-blue-50 text-blue-600 px-2 py-1 sm:px-3 sm:py-1 rounded hover:bg-[#bcced3]"
+                      className="text-xs sm:text-sm bg-blue-50 text-blue-600 px-2 sm:px-3 py-1 rounded hover:bg-[#bcced3]"
                     >
                       View
                     </button>
                     <button
                       onClick={() => handleRemoveConnection(conn._id)}
-                      className="text-xs sm:text-sm bg-red-50 text-red-600 px-2 py-1 sm:px-3 sm:py-1 rounded hover:bg-[#e2dada]"
+                      className="text-xs sm:text-sm bg-red-50 text-red-600 px-2 sm:px-3 py-1 rounded hover:bg-[#e2dada]"
                     >
                       Remove
                     </button>
@@ -429,4 +429,3 @@ function Network() {
 }
 
 export default Network;
-
