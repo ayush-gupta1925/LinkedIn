@@ -2,7 +2,7 @@ import Nav from "../components/Nav.jsx";
 import React, { useContext, useState, useRef } from "react";
 import dp from "../assets/dp.png";
 import { FiPlus } from "react-icons/fi";
-import { userDataContext } from "../context/userContext.jsx";
+import { userDataContext } from "../context/UserContext.jsx";
 import { authDataContext } from "../context/AuthContext.jsx";
 import { IoPencil } from "react-icons/io5";
 import { IoCameraOutline } from "react-icons/io5";
