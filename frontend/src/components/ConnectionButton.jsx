@@ -1,7 +1,7 @@
 // ConnectionButton.jsx
 import React, { useContext, useState, useEffect } from "react";
 import { authDataContext } from "../context/AuthContext.jsx";
-import { userDataContext } from "../context/userContext.jsx";
+import { userDataContext } from "../context/UserContext.jsx";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { socket } from "../context/userContext.jsx"; // use same socket
