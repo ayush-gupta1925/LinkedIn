@@ -196,7 +196,7 @@ function Nav() {
 
 
 
-  {searchData.length > 0 && (
+  {/* /* {searchData.length > 0 && (
           <div className="absolute top-[2.8rem] sm:top-[3.2rem] left-0 w-[250px] sm:w-[500px] max-h-[300px] overflow-auto bg-white rounded-lg shadow-lg z-[90] p-2 sm:p-4">
             {searchData.map((sea) => (
               <div
@@ -216,7 +216,36 @@ function Nav() {
               </div>
             ))}
           </div>
-        )}
+        )} */ }
+
+      {searchData.length > 0 && (
+  <div className="absolute top-[70px] sm:top-[80px] left-[10px] sm:left-[13%] md:left-[10%] w-[280px] sm:w-[500px] max-h-[300px] bg-white rounded-lg shadow-lg overflow-auto flex flex-col gap-3 p-3 z-[90]">
+    {searchData.map((sea) => (
+      <div
+        key={sea._id}
+        className="flex items-center gap-3 p-2 border-b last:border-b-0 hover:bg-[#b6c0c9] cursor-pointer rounded-md"
+        onClick={() => handleGetProfile(sea.userName)}
+      >
+        <div className="rounded-full overflow-hidden flex items-center justify-center">
+          <img
+            src={sea.profileImage || dp}
+            alt=""
+            className="w-[45px] sm:w-[55px] h-[45px] sm:h-[55px] rounded-full object-cover"
+          />
+        </div>
+        <div className="flex flex-col justify-center">
+          <span className="text-[16px] sm:text-[20px] font-semibold text-gray-700">
+            {`${sea.firstName} ${sea.lastName}`}
+          </span>
+          <span className="text-[14px] sm:text-[16px] text-gray-600">
+            {sea.headline}
+          </span>
+        </div>
+      </div>
+    ))}
+  </div>
+)}
+
 
       
 
