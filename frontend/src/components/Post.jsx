@@ -745,7 +745,7 @@ function Post({ id, author, like, comment, description, image, createdAt }) {
                       alt=""
                       className="w-[35px] h-[35px] sm:w-[45px] sm:h-[45px] md:w-[55px] md:h-[55px] rounded-full object-cover"
                     />
-                    <div className="max-w-full">
+                    <div className="max-w-full pr-[20px]">
                       <div className="text-[14px] sm:text-[16px] md:text-[18px] font-semibold">{`${com.user.firstName} ${com.user.lastName}`}</div>
                       <div className="text-[11px] sm:text-[13px] md:text-[14px] text-gray-600">
                         {com.user.headline}
