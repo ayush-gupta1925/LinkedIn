@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 
 export const userDataContext = createContext();
-export const socket = io("http://localhost:8000", { withCredentials: true });
+export const socket = io("https://linkedin-backend-7kvt.onrender.com", { withCredentials: true });
 
 function UserContext({ children }) {
   let navigate = useNavigate();
