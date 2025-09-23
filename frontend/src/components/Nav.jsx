@@ -6,7 +6,7 @@ import { FaUsers } from "react-icons/fa";
 import { IoIosNotifications } from "react-icons/io";
 import dp from "../assets/dp.png";
 import axios from "axios";
-import { userDataContext } from "../context/userContext.jsx";
+import { userDataContext } from "../context/UserContext.jsx";
 import { authDataContext } from "../context/AuthContext.jsx";
 import { socket } from "../context/userContext.jsx";
 import { Navigate, useNavigate } from "react-router-dom";
