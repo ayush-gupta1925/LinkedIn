@@ -439,18 +439,32 @@
 
 
 
+// import React, { useContext, useState, useEffect, useRef } from "react";
+// import dp from "../assets/dp.png";
+// import { IoMdSend } from "react-icons/io";
+// import { FaRegCommentDots } from "react-icons/fa";
+// import { AiOutlineLike, AiFillLike } from "react-icons/ai";
+// import { MdEdit, MdDelete } from "react-icons/md";
+// import axios from "axios";
+// import { RxCross2 } from "react-icons/rx";
+// import moment from "moment";
+// import { authDataContext } from "../context/AuthContext.jsx";
+// import { socket, userDataContext } from "../context/UserContext.jsx";
+// import ConnectionButton from "./ConnectionButton.jsx";
+
+
 import React, { useContext, useState, useEffect, useRef } from "react";
 import dp from "../assets/dp.png";
 import { IoMdSend } from "react-icons/io";
 import { FaRegCommentDots } from "react-icons/fa";
 import { AiOutlineLike, AiFillLike } from "react-icons/ai";
+import { BsImage } from "react-icons/bs";
+import { RxCross2 } from "react-icons/rx";
 import { MdEdit, MdDelete } from "react-icons/md";
 import axios from "axios";
-import { RxCross2 } from "react-icons/rx";
 import moment from "moment";
 import { authDataContext } from "../context/AuthContext.jsx";
 import { socket, userDataContext } from "../context/UserContext.jsx";
-import ConnectionButton from "./ConnectionButton.jsx";
 
 function Post({ id, author, like, comment, description, image, createdAt }) {
   // const imageInputRef = useRef(null);
