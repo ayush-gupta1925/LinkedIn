@@ -452,7 +452,24 @@ import { socket, userDataContext } from "../context/UserContext.jsx";
 import ConnectionButton from "./ConnectionButton.jsx";
 
 function Post({ id, author, like, comment, description, image, createdAt }) {
-  const imageInputRef = useRef(null);
+  // const imageInputRef = useRef(null);
+
+  // const [more, setMore] = useState(false);
+  // const [isEditing, setIsEditing] = useState(false);
+  // const [editDesc, setEditDesc] = useState(description || "");
+  // const [editImage, setEditImage] = useState(null);
+  // const [imagePreview, setImagePreview] = useState(null);
+  // const [likes, setLikes] = useState([]);
+  // const [comments, setComments] = useState([]);
+  // const [commentContent, setCommentContent] = useState("");
+  // const [showComment, setShowComment] = useState(false);
+
+  // const { userData, handleGetProfile, setPostData } =
+  //   useContext(userDataContext);
+  // const { serverUrl } = useContext(authDataContext);
+
+
+   const imageInputRef = useRef(null);
 
   const [more, setMore] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -464,8 +481,7 @@ function Post({ id, author, like, comment, description, image, createdAt }) {
   const [commentContent, setCommentContent] = useState("");
   const [showComment, setShowComment] = useState(false);
 
-  const { userData, handleGetProfile, setPostData } =
-    useContext(userDataContext);
+  const { userData, handleGetProfile, setPostData } = useContext(userDataContext);
   const { serverUrl } = useContext(authDataContext);
 
   useEffect(() => {
@@ -600,6 +616,86 @@ function Post({ id, author, like, comment, description, image, createdAt }) {
   return (
     <div className="w-full max-w-full bg-white rounded-lg p-4 gap-4 flex flex-col post-container mb-4">
       {/* Post Header */}
+
+ {/* Edit Modal */}
+      {isEditing && (
+        <>
+          <div className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-[100]" />
+          <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[150] bg-white p-6 rounded-lg shadow-lg w-[90%] max-w-[500px]">
+            <RxCross2
+              className="absolute right-4 top-4 text-2xl cursor-pointer hover:text-red-500"
+              onClick={() => setIsEditing(false)}
+            />
+            <div className="flex items-center gap-3 mb-4">
+              <img
+                src={userData?.profileImage || dp}
+                alt="author"
+                className="w-12 h-12 rounded-full object-cover"
+              />
+              <span className="font-semibold text-gray-700">
+                {userData?.firstName} {userData?.lastName}
+              </span>
+            </div>
+
+            <form className="flex flex-col gap-4" onSubmit={handleEditSubmit}>
+              <textarea
+                value={editDesc}
+                onChange={(e) => setEditDesc(e.target.value)}
+                rows={5}
+                placeholder="Edit your post..."
+                className="w-full border p-3 rounded-lg outline-none resize-none focus:ring-2 focus:ring-blue-500"
+              />
+              {(imagePreview || image) && (
+                <div className="w-full flex justify-center items-center overflow-hidden rounded-lg border border-gray-200">
+                  <img
+                    src={imagePreview || image?.url || image}
+                    alt="preview"
+                    className="h-[170px] object-cover rounded-lg"
+                  />
+                </div>
+              )}
+
+              <div
+                className="flex items-center gap-2 cursor-pointer text-gray-600 hover:text-blue-500"
+                onClick={() => imageInputRef.current?.click()}
+              >
+                <BsImage className="w-6 h-6" />
+                <span className="text-sm font-medium">Upload image</span>
+              </div>
+              <input
+                type="file"
+                accept="image/*"
+                ref={imageInputRef}
+                onChange={onSelectImage}
+                className="hidden"
+              />
+
+              <div className="flex justify-end gap-3">
+                <button
+                  type="submit"
+                  className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition"
+                >
+                  Save
+                </button>
+                <button
+                  type="button"
+                  className="bg-gray-300 px-5 py-2 rounded-lg hover:bg-gray-400 transition"
+                  onClick={() => {
+                    setIsEditing(false);
+                    setEditImage(null);
+                    setImagePreview(null);
+                  }}
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </>
+      )}
+
+
+      
   {/* Post Header */}
 <div className="flex justify-between items-start w-full gap-2 sm:gap-3 md:gap-4">
   <div
