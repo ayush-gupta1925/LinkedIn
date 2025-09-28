@@ -325,7 +325,7 @@ import React, {
 import ai from "../assets/ai.png";
 import { useNavigate } from "react-router-dom";
 import open from "../assets/start.mp3";
-import { socket, userDataContext } from "../context/userContext.jsx";
+import { socket, userDataContext } from "../context/UserContext.jsx";
 
 function Ai() {
   const navigate = useNavigate();
