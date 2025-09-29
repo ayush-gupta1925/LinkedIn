@@ -62,6 +62,13 @@ function Home() {
 
       setPosting(false);
       setUploadPost(false);
+
+
+    setFrontendImage("")
+    setBackendImage(null)
+    setDescription("")
+ 
+      
     } catch (err) {
       console.log(err);
       setPosting(false);
